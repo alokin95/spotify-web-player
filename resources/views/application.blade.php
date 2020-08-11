@@ -3,133 +3,147 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://kit.fontawesome.com/d5fba335cd.js" crossorigin="anonymous"></script>
         <title>Laravel</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+        html {
+            font-family: Arial;
+            font-size: 16px;
+            background: #5e42a6;
         }
 
-        :root {
-            --primary-color: #D96AA7;
-            --secondary-color: #422C73;
-            --complimentary-color: #88BFB5;
-            --contrast-color: #F2E527;
-            --light-color: #D2A9D9;
-        }
-
-        .container {
-            background: #191919;
-            min-height: 100vh;
-            font-family: Montserrat, sans-serif;
-        }
-
-        nav a {
-            font-size: 40px;
-            color: #fff;
-            text-decoration: none;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
+        .sidebar {
             position: fixed;
-            left: 0;
-            z-index: 50;
-            display: flex;
-            justify-content: space-around;
-            flex-direction: column;
+            width: 25%;
             height: 100vh;
-            background: var(--secondary-color);
+            background: #312450;
         }
 
-        section {
-            position: absolute;
-            top: 0;
-            height: 100vh;
-            width: 0;
-            opacity: 0;
-            transition: all ease-in .5s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .nav {
+            position: relative;
+            margin: 0 15%;
+            text-align: right;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
         }
 
-        section h1 {
-            color: #fff;
-            font-size: 50px;
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav ul li {
+            position: relative;
+            margin: 3.2em 0;
+        }
+
+        .nav ul li a {
+            line-height: 5em;
             text-transform: uppercase;
-            opacity: 0;
+            text-decoration: none;
+            letter-spacing: 0.4em;
+            color: rgba(255, 255, 255, 0.35);
+            display: block;
+            transition: all ease-out 300ms;
         }
 
-        /* Styles applied on trigger */
-        section:target {
-            opacity: 1;
+        .selected-link {
+            color: white !important;
+        }
+
+        .nav ul li.active a {
+            color: white;
+        }
+
+        .nav ul li:not(.active)::after {
+            opacity: 0.2;
+        }
+
+        .nav ul li:not(.active):hover a {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .nav ul li::after {
+            content: '';
             position: absolute;
-            left: 0;
             width: 100%;
-            height: 100%;
-            z-index: 10;
+            height: 0.2em;
+            background: black;
+            left: 0;
+            bottom: 0;
+            background-image: linear-gradient(to right, #5e42a6, #b74e91);
         }
 
-        section:target h1 {
-            opacity: 0;
-            animation: 2s fadeIn forwards .5s;
+        #music-player {
+            position: relative;
+            top: 10%;
+            left: 15%;
         }
 
-        #first {
-            background:var(--primary-color);
-        }
-        #second {
-            background: var(--complimentary-color);
-        }
-
-        #third {
-            background: var(--contrast-color);
+        .twitter {
+            position: relative;
+            width: 75%;
+            float: right;
+            padding-top: 200px;
         }
 
-        #fourth {
-            background: var(--light-color);
+        .twitter .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes fadeIn {
-            100% { opacity:1 }
+        .twitter a {
+            position: relative;
+        }
+
+        .twitter a img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .twitter p {
+            text-transform: uppercase;
+            font-size: 1em;
+            letter-spacing: 0.1em;
+            color: #FFF;
+            font-weight: bold;
+            margin-top: 20px;
         }
     </style>
     </head>
     <body>
         <div id="app">
-            <router-view></router-view>
 
-            <nav>
-                <a href="#first"><i class="far fa-user"></i></a>
-                <a href="#second"><i class="fas fa-briefcase"></i></a>
-                <a href="#third"><i class="far fa-file"></i></a>
-                <a href="#fourth"><i class="far fa-address-card"></i></a>
-            </nav>
+            <main class="main">
+                <aside class="sidebar">
+                    <div id="music-player">
+                        <music-player></music-player>
+                    </div>
+                    <nav class="nav">
+                        <ul>
+                            <li><router-link to="/" exact>Spotify</router-link></li>
+                            <li><router-link to="/sports" >Sports</router-link></li>
+                            <li><router-link to="/settings" >Settings</router-link></li>
+                        </ul>
+                    </nav>
+                </aside>
 
-            <div class= 'container'>
-                <section id= 'first'>
-                    <h1>First</h1>
+                <section class="twitter">
+                    <div class="container">
+                        <router-view></router-view>
                 </section>
-
-                <section id= 'second'>
-                    <h1>Second</h1>
-                </section>
-
-                <section id= 'third'>
-                    <h1>Third</h1>
-                </section>
-
-                <section id= 'fourth'>
-                    <h1>Fourth</h1>
-                </section>
-            </div>
+            </main>
         </div>
 
+        <script>
+
+
+        </script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>

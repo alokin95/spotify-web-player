@@ -1,8 +1,12 @@
 <template>
-    <h1>Home</h1>
+    <div>
+    </div>
 </template>
 
 <script>
+
+    import MusicPlayer from './MusicPlayerComponent';
+
     export default {
     }
 </script>

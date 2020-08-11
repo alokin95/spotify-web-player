@@ -6,6 +6,10 @@ import routes from './routes';
 
 Vue.use(VueRouter);
 
+Vue.component(
+    'music-player',
+    require('./components/MusicPlayerComponent.vue').default
+    );
 
 const app = new Vue({
     el: '#app',
