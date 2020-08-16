@@ -129,7 +129,6 @@ html, body {
 .player .control-panel .album-art {
     position: absolute;
     left: 20px;
-    top: -15px;
     height: 80px;
     width: 80px;
     border-radius: 50%;

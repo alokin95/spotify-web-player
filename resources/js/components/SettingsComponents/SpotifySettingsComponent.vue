@@ -10,7 +10,7 @@ export default {
     methods: {
 
         spotifyAuthentication() {
-            window.location.href = "https://accounts.spotify.com/authorize?client_id=2953f04007ef44788f314f3c964b4317&response_type=token&redirect_uri=http://spotify.loc/spotify/callback";
+            window.location.href = "api/spotify/authenticate";
         }
     }
 }

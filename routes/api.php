@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/spotify/authenticate', 'SpotifyController@authenticate');
+Route::get('/spotify/authenticate', 'SpotifyAuthController@authenticate');
+Route::get('spotify/callback', 'SpotifyAuthController@callback');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
