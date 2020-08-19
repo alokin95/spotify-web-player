@@ -16,14 +16,14 @@ export default {
 
     data() {
         return {
-            access_token: "",
+            user: {},
             player: {}
         }
     },
 
     mounted() {
         this.getAuthenticatedUser();
-        this.initializeSpotifyPlayer();
+        // this.initializeSpotifyPlayer();
     },
 
     methods: {
@@ -33,56 +33,46 @@ export default {
             axios.get('api/spotify/user')
                 .then(function (response){
                     if (response.data.user){
-                        $cookies.set('spotify:user', response.data.user);
-                        self.access_token = response.data.user['access_token'];
+                        $cookies.set('spotify-user', response.data.user);
+                        self.user = response.data.user;
+                        self.initializeSpotifyPlayer();
                     }
                     else {
-                        $cookies.remove('spotify:user');
+                        $cookies.remove('spotify-user');
                     }
                 });
         },
 
         initializeSpotifyPlayer() {
             let self = this;
-            let loggedInUser = $cookies.get('spotify:user');
-            if (!loggedInUser)
-            {
-                return false;
-            }
-            let access_token = loggedInUser['access_token'];
-            // let access_token = this.access_token;
-            window.onSpotifyWebPlaybackSDKReady = () => {
-                const token = access_token;
-                const player = new Spotify.Player({
-                    name: 'Web Browser Player',
-                    getOAuthToken: cb => { cb(token); }
-                });
+            this.player = new window.Spotify.Player({
+                name: 'Web Browser Player',
+                getOAuthToken: cb => { cb(self.user['access_token']); }
+            });
 
-                self.player = player;
-                // Error handling
-                player.addListener('initialization_error', ({ message }) => { console.error(message); });
-                player.addListener('authentication_error', ({ message }) => { console.error(message); });
-                player.addListener('account_error', ({ message }) => { console.error(message); });
-                player.addListener('playback_error', ({ message }) => { console.error(message); });
+            // Error handling
+            // player.addListener('initialization_error', ({ message }) => { console.error(message); });
+            // player.addListener('authentication_error', ({ message }) => { console.error(message); });
+            // player.addListener('account_error', ({ message }) => { console.error(message); });
+            // player.addListener('playback_error', ({ message }) => { console.error(message); });
 
-                // Playback status updates
-                player.addListener('player_state_changed', state => { console.log(state); });
+            // Playback status updates
+            // player.addListener('player_state_changed', state => { console.log(state); });
 
-                // Ready
-                player.addListener('ready', ({device_id}) => {
-                    console.log("Device ID: " + device_id);
-                    $cookies.set('spotify:device_id', device_id);
-                });
+            // Ready
+            // player.addListener('ready', ({device_id}) => {
+            //     console.log("Device ID: " + device_id);
+            //     $cookies.set('spotify:device_id', device_id);
+            // });
 
-                // Not Ready
-                player.addListener('not_ready', ({ device_id }) => {
-                    console.log('Device ID has gone offline', device_id);
-                });
+            // Not Ready
+            // player.addListener('not_ready', ({ device_id }) => {
+            //     console.log('Device ID has gone offline', device_id);
+            // });
 
-                // Connect to the player!
-                player.connect();
+            // Connect to the player!
+            this.player.connect();
 
-            };
         }
     }
 }

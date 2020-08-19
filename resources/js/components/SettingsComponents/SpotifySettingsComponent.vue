@@ -40,13 +40,13 @@ export default {
             axios.post('api/spotify/revoke')
                 .then(function (response){
                    self.user = false;
-                   $cookies.remove('spotify:user');
+                   $cookies.remove('spotify-user');
                 });
         },
 
         populateUserObject() {
-            if ($cookies.get('spotify:user')) {
-                this.user = $cookies.get('spotify:user');
+            if ($cookies.get('spotify-user')) {
+                this.user = $cookies.get('spotify-user');
             }
         },
     }

@@ -144,5 +144,10 @@
         </script>
     <script src="{{asset('js/app.js')}}"></script>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            window.Spotify = Spotify;
+        };
+    </script>
     </body>
 </html>

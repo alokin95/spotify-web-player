@@ -1924,80 +1924,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      access_token: "",
+      user: {},
       player: {}
     };
   },
   mounted: function mounted() {
-    this.getAuthenticatedUser();
-    this.initializeSpotifyPlayer();
+    this.getAuthenticatedUser(); // this.initializeSpotifyPlayer();
   },
   methods: {
     getAuthenticatedUser: function getAuthenticatedUser() {
       var self = this;
       axios.get('api/spotify/user').then(function (response) {
         if (response.data.user) {
-          $cookies.set('spotify:user', response.data.user);
-          self.access_token = response.data.user['access_token'];
+          $cookies.set('spotify-user', response.data.user);
+          self.user = response.data.user;
+          self.initializeSpotifyPlayer();
         } else {
-          $cookies.remove('spotify:user');
+          $cookies.remove('spotify-user');
         }
       });
     },
     initializeSpotifyPlayer: function initializeSpotifyPlayer() {
       var self = this;
-      var loggedInUser = $cookies.get('spotify:user');
+      this.player = new window.Spotify.Player({
+        name: 'Web Browser Player',
+        getOAuthToken: function getOAuthToken(cb) {
+          cb(self.user['access_token']);
+        }
+      }); // Error handling
+      // player.addListener('initialization_error', ({ message }) => { console.error(message); });
+      // player.addListener('authentication_error', ({ message }) => { console.error(message); });
+      // player.addListener('account_error', ({ message }) => { console.error(message); });
+      // player.addListener('playback_error', ({ message }) => { console.error(message); });
+      // Playback status updates
+      // player.addListener('player_state_changed', state => { console.log(state); });
+      // Ready
+      // player.addListener('ready', ({device_id}) => {
+      //     console.log("Device ID: " + device_id);
+      //     $cookies.set('spotify:device_id', device_id);
+      // });
+      // Not Ready
+      // player.addListener('not_ready', ({ device_id }) => {
+      //     console.log('Device ID has gone offline', device_id);
+      // });
+      // Connect to the player!
 
-      if (!loggedInUser) {
-        return false;
-      }
-
-      var access_token = loggedInUser['access_token']; // let access_token = this.access_token;
-
-      window.onSpotifyWebPlaybackSDKReady = function () {
-        var token = access_token;
-        var player = new Spotify.Player({
-          name: 'Web Browser Player',
-          getOAuthToken: function getOAuthToken(cb) {
-            cb(token);
-          }
-        });
-        self.player = player; // Error handling
-
-        player.addListener('initialization_error', function (_ref) {
-          var message = _ref.message;
-          console.error(message);
-        });
-        player.addListener('authentication_error', function (_ref2) {
-          var message = _ref2.message;
-          console.error(message);
-        });
-        player.addListener('account_error', function (_ref3) {
-          var message = _ref3.message;
-          console.error(message);
-        });
-        player.addListener('playback_error', function (_ref4) {
-          var message = _ref4.message;
-          console.error(message);
-        }); // Playback status updates
-
-        player.addListener('player_state_changed', function (state) {
-          console.log(state);
-        }); // Ready
-
-        player.addListener('ready', function (_ref5) {
-          var device_id = _ref5.device_id;
-          console.log("Device ID: " + device_id);
-          $cookies.set('spotify:device_id', device_id);
-        }); // Not Ready
-
-        player.addListener('not_ready', function (_ref6) {
-          var device_id = _ref6.device_id;
-          console.log('Device ID has gone offline', device_id);
-        }); // Connect to the player!
-
-        player.connect();
-      };
+      this.player.connect();
     }
   }
 });
@@ -2176,12 +2148,12 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       axios.post('api/spotify/revoke').then(function (response) {
         self.user = false;
-        $cookies.remove('spotify:user');
+        $cookies.remove('spotify-user');
       });
     },
     populateUserObject: function populateUserObject() {
-      if ($cookies.get('spotify:user')) {
-        this.user = $cookies.get('spotify:user');
+      if ($cookies.get('spotify-user')) {
+        this.user = $cookies.get('spotify-user');
       }
     }
   }
