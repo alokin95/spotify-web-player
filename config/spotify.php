@@ -10,18 +10,32 @@ return [
     'response_type' => 'code',
 
     'scopes' => [
+        //Spotify connect
         'user-read-playback-state',
         'user-modify-playback-state',
         'user-read-currently-playing',
-        'streaming app-remote-control',
+
+        //Listening History
         'user-top-read',
         'user-read-playback-position',
         'user-read-recently-played',
+
+        //Library
         'user-library-modify',
         'user-library-read',
+
+        //Playlists
         'playlist-read-collaborative',
         'playlist-modify-public',
         'playlist-read-private',
-        'playlist-modify-private'
+        'playlist-modify-private',
+
+        //Playback
+        'streaming',
+        'app-remote-control',
+
+        //Users
+        'user-read-email',
+        'user-read-private'
     ],
 ];

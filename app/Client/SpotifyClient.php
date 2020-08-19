@@ -4,10 +4,22 @@
 namespace App\Client;
 
 
+use App\Repository\SpotifyRepositoryInterface;
+use App\Repository\TokenRepositoryInterface;
 use Illuminate\Support\Facades\Http;
 
 class SpotifyClient
 {
+
+    /**
+     * @var TokenRepositoryInterface
+     */
+    private $tokenRepository;
+
+    public function __construct(TokenRepositoryInterface $tokenRepository)
+    {
+        $this->tokenRepository = $tokenRepository;
+    }
 
     public function authorize()
     {
@@ -16,7 +28,7 @@ class SpotifyClient
         $response_type = config('spotify.response_type');
         $scopes = implode(" ", config('spotify.scopes'));
 
-        $url = "https://accounts.spotify.com/authorize?client_id=$client_id&response_type=$response_type&redirect_uri=$redirect_uri&scopes=$scopes";
+        $url = "https://accounts.spotify.com/authorize?client_id=$client_id&response_type=$response_type&redirect_uri=$redirect_uri&scope=$scopes";
 
         return redirect()->away($url);
     }
@@ -32,6 +44,13 @@ class SpotifyClient
         ]);
 
         return \GuzzleHttp\json_decode($response);
+    }
+
+    public function getUserData()
+    {
+        $accessToken = $this->tokenRepository->getAccessToken('spotify');
+        $response = Http::withHeaders(["Authorization" => "Bearer " . $accessToken])->get('https://api.spotify.com/v1/me');
+        return $response->json();
     }
 
 }

@@ -1,5 +1,8 @@
 <template>
-    <h1>Sport</h1>
+    <div>
+        <h1>Sport</h1>
+        <h2>COMING SOONG</h2>
+    </div>
 </template>
 
 <script>

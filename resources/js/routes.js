@@ -1,7 +1,7 @@
 import NotFound from "./components/NotFoundComponent";
-import Home from "./components/HomeComponent";
 import Sports from "./components/SportComponent";
 import Settings from "./components/SettingsComponents/MainSettingsComponent";
+import Spotify from "./components/SpotifyComponent";
 
 export default {
     mode: 'history',
@@ -16,8 +16,13 @@ export default {
 
         {
             path: '/',
-            component: Home
+            component: Spotify
         },
+
+        // {
+        //     path: '/spotify',
+        //     component: Spotify
+        // },
 
         {
             path: '/sports',

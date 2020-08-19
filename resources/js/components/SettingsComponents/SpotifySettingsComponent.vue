@@ -1,17 +1,54 @@
 <template>
-    <button @click="spotifyAuthentication">
+    <button v-if="!this.user" @click="spotifyAuthentication">
         <span>Connect spotify</span>
     </button>
+    <div v-else>
+        <div class="spotify-status">
+            <h1>Spotify connected!</h1>
+        </div>
+        <div class="spotify-user">
+            Username: {{this.user.display_name}}
+        </div>
+        <button @click="revokeSpotifyAccess">
+            <span>Revoke access</span>
+        </button>
+    </div>
 </template>
 
 <script>
 export default {
 
+    data() {
+        return {
+            user: false
+        }
+    },
+
+    mounted() {
+        this.populateUserObject();
+    },
+
     methods: {
 
         spotifyAuthentication() {
             window.location.href = "api/spotify/authenticate";
-        }
+        },
+
+        revokeSpotifyAccess()
+        {
+            let self = this;
+            axios.post('api/spotify/revoke')
+                .then(function (response){
+                   self.user = false;
+                   $cookies.remove('spotify:user');
+                });
+        },
+
+        populateUserObject() {
+            if ($cookies.get('spotify:user')) {
+                this.user = $cookies.get('spotify:user');
+            }
+        },
     }
 }
 </script>
@@ -47,6 +84,15 @@ button:hover {
 button:hover span {
     animation: storm 0.7s ease-in-out both;
     animation-delay: 0.06s;
+}
+
+.spotify-status {
+    text-align: center;
+}
+
+.spotify-user {
+    text-align: center;
+    margin: 20px;
 }
 
 @keyframes rotate {

@@ -11,14 +11,14 @@
         html {
             font-family: Arial;
             font-size: 16px;
-            background: #5e42a6;
+            background: #282828;
         }
 
         .sidebar {
             position: fixed;
             width: 25%;
             height: 100vh;
-            background: #312450;
+            background: #181818;
         }
 
         .nav {
@@ -86,7 +86,6 @@
             position: relative;
             width: 75%;
             float: right;
-            padding-top: 200px;
         }
 
         .twitter .container {
@@ -143,7 +142,7 @@
 
 
         </script>
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
     </body>
 </html>

@@ -14,43 +14,77 @@
 <script>
 export default {
 
-    mounted() {
-        // this.initializeSpotifyPlayer();
+    data() {
+        return {
+            access_token: "",
+            player: {}
+        }
     },
 
-    // methods: {
-    //     initializeSpotifyPlayer() {
-    //         window.onSpotifyWebPlaybackSDKReady = () => {
-    //             const token = 'BQAXd9Q05emZrGonbURqktp98D0kxeGjG3qH1SMZpjbTOeOKbdwJNDZc3sYhupoHNGC_6KM6ODCe-9EBQxsQPN-c6qlBpfa12PmKdIEQR-bBxmMt_x9NkE1L4qSwU5_BhfW17bP9bR1J';
-    //             const player = new Spotify.Player({
-    //                 name: 'Web Browser Player',
-    //                 getOAuthToken: cb => { cb(token); }
-    //             });
-    //
-    //             // Error handling
-    //             player.addListener('initialization_error', ({ message }) => { console.error(message); });
-    //             player.addListener('authentication_error', ({ message }) => { console.error(message); });
-    //             player.addListener('account_error', ({ message }) => { console.error(message); });
-    //             player.addListener('playback_error', ({ message }) => { console.error(message); });
-    //
-    //             // Playback status updates
-    //             player.addListener('player_state_changed', state => { console.log(state); });
-    //
-    //             // Ready
-    //             player.addListener('ready', ({device_id}) => {
-    //                 console.log("Device ID: " + device_id);
-    //             });
-    //
-    //             // Not Ready
-    //             player.addListener('not_ready', ({ device_id }) => {
-    //                 console.log('Device ID has gone offline', device_id);
-    //             });
-    //
-    //             // Connect to the player!
-    //             player.connect();
-    //         };
-    //     }
-    // }
+    mounted() {
+        this.getAuthenticatedUser();
+        this.initializeSpotifyPlayer();
+    },
+
+    methods: {
+
+        getAuthenticatedUser() {
+            var self = this;
+            axios.get('api/spotify/user')
+                .then(function (response){
+                    if (response.data.user){
+                        $cookies.set('spotify:user', response.data.user);
+                        self.access_token = response.data.user['access_token'];
+                    }
+                    else {
+                        $cookies.remove('spotify:user');
+                    }
+                });
+        },
+
+        initializeSpotifyPlayer() {
+            let self = this;
+            let loggedInUser = $cookies.get('spotify:user');
+            if (!loggedInUser)
+            {
+                return false;
+            }
+            let access_token = loggedInUser['access_token'];
+            // let access_token = this.access_token;
+            window.onSpotifyWebPlaybackSDKReady = () => {
+                const token = access_token;
+                const player = new Spotify.Player({
+                    name: 'Web Browser Player',
+                    getOAuthToken: cb => { cb(token); }
+                });
+
+                self.player = player;
+                // Error handling
+                player.addListener('initialization_error', ({ message }) => { console.error(message); });
+                player.addListener('authentication_error', ({ message }) => { console.error(message); });
+                player.addListener('account_error', ({ message }) => { console.error(message); });
+                player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+                // Playback status updates
+                player.addListener('player_state_changed', state => { console.log(state); });
+
+                // Ready
+                player.addListener('ready', ({device_id}) => {
+                    console.log("Device ID: " + device_id);
+                    $cookies.set('spotify:device_id', device_id);
+                });
+
+                // Not Ready
+                player.addListener('not_ready', ({ device_id }) => {
+                    console.log('Device ID has gone offline', device_id);
+                });
+
+                // Connect to the player!
+                player.connect();
+
+            };
+        }
+    }
 }
 </script>
 
@@ -124,9 +158,9 @@ html, body {
     width: 300px;
     height: 80px;
     z-index: 5;
-    box-shadow: 0px 20px 20px 5px rgba(132, 132, 132, 0.3);
 }
 .player .control-panel .album-art {
+    background-color: beige;
     position: absolute;
     left: 20px;
     height: 80px;
