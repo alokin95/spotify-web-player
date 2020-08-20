@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Spotify;
 
 
-use App\Repository\TokenRepositoryInterface;
+use App\Repository\Token\TokenRepositoryInterface;
 
 class SpotifyService
 {

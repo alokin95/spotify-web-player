@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Response\ApiResponse;
 use App\Service\Spotify\SpotifyAuthService;
-use App\Service\SpotifyService;
+use App\Service\Spotify\SpotifyService;
 use Illuminate\Http\Request;
 
 class SpotifyAuthController extends Controller
@@ -32,11 +31,6 @@ class SpotifyAuthController extends Controller
     {
         $this->spotifyAuthService->getAccessToken();
         return redirect('/');
-    }
-
-    public function refreshToken()
-    {
-
     }
 
     public function user()

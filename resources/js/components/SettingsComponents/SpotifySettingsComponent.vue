@@ -10,7 +10,7 @@
             Username: {{this.user.display_name}}
         </div>
         <button @click="revokeSpotifyAccess">
-            <span>Revoke access</span>
+            <span>Disconnect account</span>
         </button>
     </div>
 </template>

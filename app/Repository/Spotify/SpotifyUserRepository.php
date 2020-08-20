@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Repository;
+namespace App\Repository\Spotify;
 
 
 use App\Client\SpotifyClient;
 use Illuminate\Support\Facades\Redis;
 
-class SpotifyRepository implements SpotifyRepositoryInterface
+class SpotifyUserRepository implements SpotifyUserRepositoryInterface
 {
     /**
      * @var SpotifyClient
@@ -29,7 +29,7 @@ class SpotifyRepository implements SpotifyRepositoryInterface
 
         if (!$this->getUserFromRedis()){
             $user = $this->spotifyClient->getUserData();
-            $this->saveUser($user);
+            $this->save($user);
         }
 
         return $this->getUserFromRedis();
@@ -40,7 +40,7 @@ class SpotifyRepository implements SpotifyRepositoryInterface
         return Redis::get('spotify:access_token');
     }
 
-    private function saveUser($user)
+    public function save($user)
     {
         Redis::hset('spotify:user', 'display_name', $user['display_name']);
         Redis::hset('spotify:user', 'profile_link', $user['external_urls']['spotify']);

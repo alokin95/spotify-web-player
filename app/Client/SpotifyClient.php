@@ -4,8 +4,7 @@
 namespace App\Client;
 
 
-use App\Repository\SpotifyRepositoryInterface;
-use App\Repository\TokenRepositoryInterface;
+use App\Repository\Token\TokenRepositoryInterface;
 use Illuminate\Support\Facades\Http;
 
 class SpotifyClient
@@ -46,11 +45,33 @@ class SpotifyClient
         return \GuzzleHttp\json_decode($response);
     }
 
+    public function refreshToken()
+    {
+        $encodedKeys = base64_encode(config('spotify.client_id') . ":" . config('spotify.client_secret'));
+        $refreshToken = $this->tokenRepository->getRefreshToken('spotify');
+
+        $response = Http::withHeaders(["Authorization" => "Basic $encodedKeys" ])->asForm()->post('https://accounts.spotify.com/api/token', [
+            'grant_type'        => 'refresh_token',
+            'refresh_token'     => $refreshToken
+        ]);
+
+        return \GuzzleHttp\json_decode($response);
+    }
+
     public function getUserData()
     {
         $accessToken = $this->tokenRepository->getAccessToken('spotify');
         $response = Http::withHeaders(["Authorization" => "Bearer " . $accessToken])->get('https://api.spotify.com/v1/me');
+
         return $response->json();
     }
 
+    public function getMostListened(string $type = 'artists')
+    {
+        $accessToken = $this->tokenRepository->getAccessToken('spotify');
+        $response = Http::withHeaders(["Authorization" => "Bearer $accessToken"])->get("https://api.spotify.com/v1/me/top/$type?time_range=short_term&limit=5");
+
+        return \GuzzleHttp\json_decode($response);
+
+    }
 }

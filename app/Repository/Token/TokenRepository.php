@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Repository;
+namespace App\Repository\Token;
 
 
 use Illuminate\Support\Facades\Redis;
@@ -21,7 +21,9 @@ class TokenRepository implements TokenRepositoryInterface
             foreach ($data as $key => $value)
             {
                 Redis::set($provider . ':' . $key, $value);
-                Redis::expire($provider . ':' . $key, $data['expires_in']);
+                if ($key != 'refresh_token') {
+                    Redis::expire($provider . ':' . $key, $data['expires_in']);
+                }
             }
 
             return true;
@@ -40,12 +42,22 @@ class TokenRepository implements TokenRepositoryInterface
 
     public function remove(string $provider) : void
     {
-        $spotifyKeys = Redis::keys('spotify*');
+        $spotifyKeys = Redis::keys($provider . '*');
 
         foreach ($spotifyKeys as $redisKey)
         {
             Redis::del($redisKey);
         }
 
+    }
+
+    public function getRefreshToken(string $provider)
+    {
+        return Redis::get($provider . ':refresh_token');
+    }
+
+    public function getTokenTTL(string $provider, string $token)
+    {
+        return Redis::ttl($provider . ":" . $token);
     }
 }

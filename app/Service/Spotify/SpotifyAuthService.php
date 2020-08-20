@@ -4,8 +4,8 @@ namespace App\Service\Spotify;
 
 
 use App\Client\SpotifyClient;
-use App\Repository\SpotifyRepositoryInterface;
-use App\Repository\TokenRepositoryInterface;
+use App\Repository\Spotify\SpotifyUserRepositoryInterface;
+use App\Repository\Token\TokenRepositoryInterface;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;
 
@@ -20,11 +20,11 @@ class SpotifyAuthService
      */
     private $tokenRepository;
     /**
-     * @var SpotifyRepositoryInterface
+     * @var SpotifyUserRepositoryInterface
      */
     private $spotifyRepository;
 
-    public function __construct(SpotifyClient $spotifyClient, TokenRepositoryInterface $tokenRepository, SpotifyRepositoryInterface $spotifyRepository)
+    public function __construct(SpotifyClient $spotifyClient, TokenRepositoryInterface $tokenRepository, SpotifyUserRepositoryInterface $spotifyRepository)
     {
         $this->spotifyClient = $spotifyClient;
         $this->tokenRepository = $tokenRepository;
@@ -62,5 +62,19 @@ class SpotifyAuthService
     public function revokeAccess()
     {
         $this->tokenRepository->remove('spotify');
+    }
+
+    public function refreshToken()
+    {
+        if ($this->tokenRepository->getRefreshToken('spotify'))
+        {
+            $accessTokenTTL = $this->tokenRepository->getTokenTTL('spotify', 'access_token');
+
+            if ($accessTokenTTL < 420)
+            {
+                $response = $this->spotifyClient->refreshToken();
+                $this->tokenRepository->save('spotify', $response);
+            }
+        }
     }
 }

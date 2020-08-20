@@ -3897,7 +3897,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("button", { on: { click: _vm.revokeSpotifyAccess } }, [
-          _c("span", [_vm._v("Revoke access")])
+          _c("span", [_vm._v("Disconnect account")])
         ])
       ])
 }
