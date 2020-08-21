@@ -4,6 +4,8 @@
 namespace App\Client;
 
 
+use App\Repository\Spotify\SpotifyArtistRepositoryInterface;
+use App\Repository\Spotify\SpotifyTrackRepositoryInterface;
 use App\Repository\Token\TokenRepositoryInterface;
 use Illuminate\Support\Facades\Http;
 
@@ -14,10 +16,23 @@ class SpotifyClient
      * @var TokenRepositoryInterface
      */
     private $tokenRepository;
+    /**
+     * @var SpotifyTrackRepositoryInterface
+     */
+    private $spotifyTrackRepository;
+    /**
+     * @var SpotifyArtistRepositoryInterface
+     */
+    private $spotifyArtistRepository;
 
-    public function __construct(TokenRepositoryInterface $tokenRepository)
+    public function __construct(
+        TokenRepositoryInterface $tokenRepository,
+        SpotifyTrackRepositoryInterface $spotifyTrackRepository,
+        SpotifyArtistRepositoryInterface $spotifyArtistRepository)
     {
         $this->tokenRepository = $tokenRepository;
+        $this->spotifyTrackRepository = $spotifyTrackRepository;
+        $this->spotifyArtistRepository = $spotifyArtistRepository;
     }
 
     public function authorize()
@@ -68,6 +83,9 @@ class SpotifyClient
 
     public function getMostListened(string $type = 'artists')
     {
+        $this->spotifyArtistRepository->removeOldArtists();
+        $this->spotifyTrackRepository->removeOldTracks();
+
         $accessToken = $this->tokenRepository->getAccessToken('spotify');
         $response = Http::withHeaders(["Authorization" => "Bearer $accessToken"])->get("https://api.spotify.com/v1/me/top/$type?time_range=short_term&limit=5");
 

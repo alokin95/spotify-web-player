@@ -24,4 +24,9 @@ class SpotifyTrackRepository implements SpotifyTrackRepositoryInterface
 
         return $responseTracks;
     }
+
+    public function removeOldTracks()
+    {
+        return Redis::del('spotify:tracks');
+    }
 }

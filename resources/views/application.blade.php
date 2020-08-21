@@ -134,6 +134,7 @@
                 <section class="twitter">
                     <div class="container">
                         <router-view></router-view>
+                    </div>
                 </section>
             </main>
         </div>

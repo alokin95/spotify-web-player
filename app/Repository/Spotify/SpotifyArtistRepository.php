@@ -27,4 +27,9 @@ class SpotifyArtistRepository implements SpotifyArtistRepositoryInterface
 
         return $responseArtists;
     }
+
+    public function removeOldArtists()
+    {
+        return Redis::del('spotify:artists');
+    }
 }

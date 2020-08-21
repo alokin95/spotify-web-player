@@ -22,7 +22,7 @@ class ArtistCreationService
     public function create($artist)
     {
         $this->artist->setGenres($artist->genres);
-        $this->artist->setImage($artist->images[1]);
+        $this->artist->setImage($artist->images[2]);
         $this->artist->setUri($artist->uri);
         $this->artist->setUrl($artist->external_urls->spotify);
         $this->artist->setName($artist->name);

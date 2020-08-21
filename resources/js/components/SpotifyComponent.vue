@@ -1,7 +1,34 @@
 <template>
-    <div id="spotify-search">
-        <div class="search__container">
-            <input class="search__input" type="text" placeholder="Search">
+    <div id="spotify-container">
+        <div id="spotify-search">
+            <div class="search__container">
+                <input class="search__input" type="text" placeholder="Search">
+            </div>
+        </div>
+        <div id="spotify-content-container">
+            <h1 id="artists-heading">Your favorite artists</h1>
+            <div id="favorite-artists">
+                <div id="artist" v-for="artist in this.artists">
+                    <div id="artist-image">
+                        <img v-bind:src="artist.image.url" alt="Artist image">
+                    </div>
+                    <div id="artist-name">
+                        {{artist.name}}
+                    </div>
+                </div>
+            </div>
+
+            <h1 id="track-heading">Your favorite tracks</h1>
+            <div id="favorite-tracks">
+                <div id="track" v-for="track in this.tracks">
+                    <div id="track-image">
+                        <img v-bind:src="track.image.url" alt="Track image">
+                    </div>
+                    <div id="track-name">
+                        {{track.name}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -37,6 +64,84 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
 
+#spotify-container {
+    width: 100%;
+}
+
+#spotify-content-container {
+    margin-top: 100px;
+}
+
+.search__container {
+    width: 20%;
+    margin: 0 auto;
+}
+
+#favorite-artists {
+    display: flex;
+    justify-content: space-around;
+}
+
+#favorite-tracks {
+    display: flex;
+    justify-content: space-around;
+}
+
+#track {
+    text-align:center;
+    color: white;
+}
+
+#artist {
+    text-align: center;
+    color: white;
+}
+
+#artists-heading {
+    color: white;
+    font-weight: bolder;
+    margin: 50px;
+}
+
+#track-heading {
+    color: white;
+    font-weight: bolder;
+    margin: 50px;
+}
+
+#artist-image {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+#artist-image img {
+    min-height: 160px;
+}
+
+#track-image {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+}
+
+#track-image img {
+    width: 160px;
+    height: 160px;
+}
+
+#track-name {
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 100px;
+}
+
+#artist-name {
+    margin: 10px;
+    font-weight: bolder;
+}
+
 .search__input {
     width: 100%;
     padding: 12px 24px;
@@ -58,4 +163,5 @@ export default {
     text-transform: uppercase;
     letter-spacing: 1.5px;
 }
+
 </style>
