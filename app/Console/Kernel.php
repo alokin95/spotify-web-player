@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('spotify:mostlistened')->everyMinute();
+        $schedule->command('spotify:mostlistened')->daily();
         $schedule->command('spotify:refreshtoken')->everyFiveMinutes();
     }
 

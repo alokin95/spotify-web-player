@@ -2198,7 +2198,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      artists: [],
+      tracks: []
+    };
+  },
+  mounted: function mounted() {
+    this.getMostListenedArtistsAndTracks();
+  },
+  methods: {
+    getMostListenedArtistsAndTracks: function getMostListenedArtistsAndTracks() {
+      var self = this;
+      axios.get('api/spotify/popular').then(function (response) {
+        self.artists = response.data.artists;
+        self.tracks = response.data.tracks;
+      });
+    }
+  }
+});
 
 /***/ }),
 

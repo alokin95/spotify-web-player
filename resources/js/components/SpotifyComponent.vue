@@ -8,6 +8,29 @@
 
 <script>
 export default {
+    data() {
+        return {
+            artists: [],
+            tracks: []
+        }
+    },
+
+    mounted() {
+        this.getMostListenedArtistsAndTracks();
+    },
+
+    methods: {
+
+      getMostListenedArtistsAndTracks() {
+          let self = this;
+          axios.get('api/spotify/popular')
+            .then( response => {
+                self.artists = response.data.artists;
+                self.tracks = response.data.tracks;
+            })
+      }
+
+    }
 }
 </script>
 

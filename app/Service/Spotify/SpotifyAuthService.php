@@ -22,13 +22,13 @@ class SpotifyAuthService
     /**
      * @var SpotifyUserRepositoryInterface
      */
-    private $spotifyRepository;
+    private $spotifyUserRepository;
 
     public function __construct(SpotifyClient $spotifyClient, TokenRepositoryInterface $tokenRepository, SpotifyUserRepositoryInterface $spotifyRepository)
     {
         $this->spotifyClient = $spotifyClient;
         $this->tokenRepository = $tokenRepository;
-        $this->spotifyRepository = $spotifyRepository;
+        $this->spotifyUserRepository = $spotifyRepository;
     }
 
     public function authorize()
@@ -50,7 +50,7 @@ class SpotifyAuthService
 
     public function getUserInfo()
     {
-        $user = $this->spotifyRepository->getAuthenticatedUser();
+        $user = $this->spotifyUserRepository->get();
 
         if (!$user) {
             return false;

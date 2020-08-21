@@ -21,6 +21,7 @@ Route::namespace('Auth')->group(function(){
     Route::post('spotify/revoke', 'SpotifyAuthController@revokeAccess');
 });
 
+Route::get('/spotify/popular', 'SpotifyController@getArtistsAndTracks');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

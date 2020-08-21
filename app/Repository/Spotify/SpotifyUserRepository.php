@@ -19,7 +19,7 @@ class SpotifyUserRepository implements SpotifyUserRepositoryInterface
         $this->spotifyClient = $spotifyClient;
     }
 
-    public function getAuthenticatedUser()
+    public function get()
     {
         $accessToken = $this->getAccessToken();
 
