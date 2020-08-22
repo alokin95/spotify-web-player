@@ -23,7 +23,10 @@ export default {
 
     mounted() {
         this.getAuthenticatedUser();
-        // this.initializeSpotifyPlayer();
+        this.initializeSpotifyObject()
+            .then(() => {
+                this.initializeSpotifyPlayer();
+            });
     },
 
     methods: {
@@ -35,7 +38,6 @@ export default {
                     if (response.data.user){
                         $cookies.set('spotify-user', response.data.user);
                         self.user = response.data.user;
-                        self.initializeSpotifyPlayer();
                     }
                     else {
                         $cookies.remove('spotify-user');
@@ -73,6 +75,16 @@ export default {
             // Connect to the player!
             this.player.connect();
 
+        },
+
+        initializeSpotifyObject() {
+            return new Promise(resolve => {
+                if (window.Spotify) {
+                    resolve();
+                } else {
+                    window.onSpotifyWebPlaybackSDKReady = resolve;
+                }
+            });
         }
     }
 }

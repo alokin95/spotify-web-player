@@ -1929,7 +1929,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getAuthenticatedUser(); // this.initializeSpotifyPlayer();
+    var _this = this;
+
+    this.getAuthenticatedUser();
+    this.initializeSpotifyObject().then(function () {
+      _this.initializeSpotifyPlayer();
+    });
   },
   methods: {
     getAuthenticatedUser: function getAuthenticatedUser() {
@@ -1938,7 +1943,6 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.user) {
           $cookies.set('spotify-user', response.data.user);
           self.user = response.data.user;
-          self.initializeSpotifyPlayer();
         } else {
           $cookies.remove('spotify-user');
         }
@@ -1970,6 +1974,15 @@ __webpack_require__.r(__webpack_exports__);
       // Connect to the player!
 
       this.player.connect();
+    },
+    initializeSpotifyObject: function initializeSpotifyObject() {
+      return new Promise(function (resolve) {
+        if (window.Spotify) {
+          resolve();
+        } else {
+          window.onSpotifyWebPlaybackSDKReady = resolve;
+        }
+      });
     }
   }
 });
