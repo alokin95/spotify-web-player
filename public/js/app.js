@@ -1934,6 +1934,8 @@ __webpack_require__.r(__webpack_exports__);
     this.getAuthenticatedUser();
     this.initializeSpotifyObject().then(function () {
       _this.initializeSpotifyPlayer();
+    }).then(function () {
+      _this.addPlayerListeners();
     });
   },
   methods: {
@@ -1949,31 +1951,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     initializeSpotifyPlayer: function initializeSpotifyPlayer() {
-      var self = this;
-      this.player = new window.Spotify.Player({
-        name: 'Web Browser Player',
-        getOAuthToken: function getOAuthToken(cb) {
-          cb(self.user['access_token']);
-        }
-      }); // Error handling
-      // player.addListener('initialization_error', ({ message }) => { console.error(message); });
-      // player.addListener('authentication_error', ({ message }) => { console.error(message); });
-      // player.addListener('account_error', ({ message }) => { console.error(message); });
-      // player.addListener('playback_error', ({ message }) => { console.error(message); });
-      // Playback status updates
-      // player.addListener('player_state_changed', state => { console.log(state); });
-      // Ready
-      // player.addListener('ready', ({device_id}) => {
-      //     console.log("Device ID: " + device_id);
-      //     $cookies.set('spotify:device_id', device_id);
-      // });
-      // Not Ready
-      // player.addListener('not_ready', ({ device_id }) => {
-      //     console.log('Device ID has gone offline', device_id);
-      // });
-      // Connect to the player!
+      var _this2 = this;
 
-      this.player.connect();
+      var self = this;
+      return new Promise(function (resolve) {
+        _this2.player = new window.Spotify.Player({
+          name: 'Web Browser Player',
+          getOAuthToken: function getOAuthToken(cb) {
+            cb(self.user['access_token']);
+          }
+        });
+        resolve();
+      });
     },
     initializeSpotifyObject: function initializeSpotifyObject() {
       return new Promise(function (resolve) {
@@ -1983,6 +1972,41 @@ __webpack_require__.r(__webpack_exports__);
           window.onSpotifyWebPlaybackSDKReady = resolve;
         }
       });
+    },
+    addPlayerListeners: function addPlayerListeners() {
+      // Error handling
+      this.player.addListener('initialization_error', function (_ref) {
+        var message = _ref.message;
+        console.error(message);
+      });
+      this.player.addListener('authentication_error', function (_ref2) {
+        var message = _ref2.message;
+        console.error(message);
+      });
+      this.player.addListener('account_error', function (_ref3) {
+        var message = _ref3.message;
+        console.error(message);
+      });
+      this.player.addListener('playback_error', function (_ref4) {
+        var message = _ref4.message;
+        console.error(message);
+      }); // Playback status updates
+
+      this.player.addListener('player_state_changed', function (state) {
+        console.log('promenio');
+      }); // Ready
+
+      this.player.addListener('ready', function (_ref5) {
+        var device_id = _ref5.device_id;
+        window.SpotifyPlayerId = device_id;
+      }); // Not Ready
+
+      this.player.addListener('not_ready', function (_ref6) {
+        var device_id = _ref6.device_id;
+        console.log('Device ID has gone offline', device_id);
+      }); // Connect to the player!
+
+      this.player.connect();
     }
   }
 });
