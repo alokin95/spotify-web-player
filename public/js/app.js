@@ -1946,11 +1946,19 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     switchDevice: function switchDevice() {
       var deviceId = window.SpotifyPlayerId;
-      axios.post('api/spotify/device', {
+
+      if (!this.playing) {
+        axios.post('api/spotify/device', {
+          deviceId: deviceId
+        });
+        this.playing = true;
+        this.trackLoaded = true;
+        return true;
+      }
+
+      axios.post('api/spotify/pause', {
         deviceId: deviceId
       });
-      this.playing = true;
-      this.trackLoaded = true;
     },
     getAuthenticatedUser: function getAuthenticatedUser() {
       var self = this;

@@ -37,4 +37,9 @@ class SpotifyController extends Controller
     {
         return $this->spotifyService->switchDevice();
     }
+
+    public function pause()
+    {
+        return $this->spotifyService->pause();
+    }
 }

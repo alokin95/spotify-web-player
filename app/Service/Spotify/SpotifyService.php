@@ -64,4 +64,9 @@ class SpotifyService
     {
         return $this->spotifyClient->switchDevice();
     }
+
+    public function pause()
+    {
+        return $this->spotifyClient->pausePlayback();
+    }
 }

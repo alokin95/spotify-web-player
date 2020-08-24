@@ -125,7 +125,7 @@
                     <nav class="nav">
                         <ul>
                             <li><router-link to="/" exact>Spotify</router-link></li>
-                            <li><router-link to="/sports" >Sports</router-link></li>
+{{--                            <li><router-link to="/sports" >Sports</router-link></li>--}}
                             <li><router-link to="/settings" >Settings</router-link></li>
                         </ul>
                     </nav>

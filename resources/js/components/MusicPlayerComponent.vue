@@ -41,12 +41,20 @@ export default {
 
         switchDevice() {
             let deviceId = window.SpotifyPlayerId;
-            axios.post('api/spotify/device', {
-                deviceId,
-            });
 
-            this.playing = true;
-            this.trackLoaded = true;
+            if (!this.playing) {
+                axios.post('api/spotify/device', {
+                    deviceId,
+                });
+
+                this.playing = true;
+                this.trackLoaded = true;
+                return true;
+            }
+
+            axios.post('api/spotify/pause', {
+                deviceId
+            });
         },
 
         getAuthenticatedUser() {

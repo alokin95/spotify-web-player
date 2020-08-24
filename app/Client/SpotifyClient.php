@@ -122,4 +122,14 @@ class SpotifyClient
 
         return \GuzzleHttp\json_encode($response);
     }
+
+    public function pausePlayback()
+    {
+        $deviceId = request()->deviceId;
+        $accessToken = $this->tokenRepository->getAccessToken('spotify');
+
+        $response = Http::withHeaders(["Authorization" => "Bearer $accessToken"])->put("https://api.spotify.com/v1/me/player/pause?device_id=$deviceId");
+
+        return \GuzzleHttp\json_encode($response);
+    }
 }
