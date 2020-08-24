@@ -59,4 +59,9 @@ class SpotifyService
 
         $this->spotifyClient->playUri($uri, $deviceId);
     }
+
+    public function switchDevice()
+    {
+        return $this->spotifyClient->switchDevice();
+    }
 }

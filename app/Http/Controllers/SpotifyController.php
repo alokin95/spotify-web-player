@@ -32,4 +32,9 @@ class SpotifyController extends Controller
     {
         $this->spotifyService->playUri();
     }
+
+    public function switchDevice()
+    {
+        return $this->spotifyService->switchDevice();
+    }
 }

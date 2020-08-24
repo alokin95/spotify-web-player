@@ -92,10 +92,9 @@ class SpotifyClient
         return \GuzzleHttp\json_decode($response);
     }
 
-    public function playUri($uri, $deviceId) : void
+    public function playUri($uri, $deviceId = "") : void
     {
         $accessToken = $this->tokenRepository->getAccessToken('spotify');
-        $deviceId = $deviceId ?: '';
 
         $data = [
             'context_uri' => $uri
@@ -109,5 +108,18 @@ class SpotifyClient
         }
 
         Http::withHeaders(["Authorization" => "Bearer $accessToken"])->put("https://api.spotify.com/v1/me/player/play?device_id=$deviceId", $data);
+    }
+
+    public function switchDevice()
+    {
+        $deviceId = request()->deviceId;
+        $accessToken = $this->tokenRepository->getAccessToken('spotify');
+
+        $response = Http::withHeaders(["Authorization" => "Bearer $accessToken"])->put('https://api.spotify.com/v1/me/player', [
+            "device_ids"    => ["$deviceId"],
+            "play"          => true
+        ]);
+
+        return \GuzzleHttp\json_encode($response);
     }
 }

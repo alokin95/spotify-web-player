@@ -2,11 +2,11 @@
     <div class="player">
         <div id="control-panel" class="control-panel">
             <div class="album-art">
-                <img v-bind:class="{playing: 'track-album-cover-spinning'}" v-show="trackLoaded" :src="trackLoaded ? currentTrack.track_window.current_track.album.images[2].url : ''">
+                <img v-bind:class="{'track-album-cover-spinning': playing}" v-show="trackLoaded" :src="trackLoaded ? currentTrack.track_window.current_track.album.images[2].url : ''">
             </div>
             <div class="controls">
                 <div class="prev"></div>
-                <div id="play" class="play"></div>
+                <div id="play" class="play" @click="switchDevice"></div>
                 <div class="next" @click="initializeSpotifyObject"></div>
             </div>
         </div>
@@ -38,6 +38,16 @@ export default {
     },
 
     methods: {
+
+        switchDevice() {
+            let deviceId = window.SpotifyPlayerId;
+            axios.post('api/spotify/device', {
+                deviceId,
+            });
+
+            this.playing = true;
+            this.trackLoaded = true;
+        },
 
         getAuthenticatedUser() {
             var self = this;
@@ -84,11 +94,23 @@ export default {
             this.player.addListener('playback_error', ({ message }) => { console.error(message); });
 
             // Playback status updates
-            this.player.addListener('player_state_changed', state => { self.currentTrack = state; self.playing = true; self.trackLoaded = true; });
+            this.player.addListener('player_state_changed', state => {
+                console.log(state);
+                if (state) {
+                    self.currentTrack = state;
+                    self.playing = !state.paused;
+                    self.trackLoaded = true;
+                }
+                else {
+                    self.currentTrack = {};
+                    self.playing = false;
+                    self.trackLoaded = false;
+                }
+            });
 
             // Ready
             this.player.addListener('ready', ({device_id}) => {
-                window.SpotifyPlayerId = device_id
+                window.SpotifyPlayerId = device_id;
             });
 
             // Not Ready

@@ -1944,6 +1944,14 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    switchDevice: function switchDevice() {
+      var deviceId = window.SpotifyPlayerId;
+      axios.post('api/spotify/device', {
+        deviceId: deviceId
+      });
+      this.playing = true;
+      this.trackLoaded = true;
+    },
     getAuthenticatedUser: function getAuthenticatedUser() {
       var self = this;
       axios.get('api/spotify/user').then(function (response) {
@@ -1999,9 +2007,17 @@ __webpack_require__.r(__webpack_exports__);
       }); // Playback status updates
 
       this.player.addListener('player_state_changed', function (state) {
-        self.currentTrack = state;
-        self.playing = true;
-        self.trackLoaded = true;
+        console.log(state);
+
+        if (state) {
+          self.currentTrack = state;
+          self.playing = !state.paused;
+          self.trackLoaded = true;
+        } else {
+          self.currentTrack = {};
+          self.playing = false;
+          self.trackLoaded = false;
+        }
       }); // Ready
 
       this.player.addListener('ready', function (_ref5) {
@@ -3745,7 +3761,7 @@ var render = function() {
                 expression: "trackLoaded"
               }
             ],
-            class: { playing: "track-album-cover-spinning" },
+            class: { "track-album-cover-spinning": _vm.playing },
             attrs: {
               src: _vm.trackLoaded
                 ? _vm.currentTrack.track_window.current_track.album.images[2]
@@ -3758,7 +3774,11 @@ var render = function() {
         _c("div", { staticClass: "controls" }, [
           _c("div", { staticClass: "prev" }),
           _vm._v(" "),
-          _c("div", { staticClass: "play", attrs: { id: "play" } }),
+          _c("div", {
+            staticClass: "play",
+            attrs: { id: "play" },
+            on: { click: _vm.switchDevice }
+          }),
           _vm._v(" "),
           _c("div", {
             staticClass: "next",
