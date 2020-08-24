@@ -2237,6 +2237,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2329,7 +2352,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Raleway:400,700,900);", ""]);
 
 // module
-exports.push([module.i, "\n#spotify-container[data-v-8a131f64] {\n    width: 100%;\n}\n#spotify-content-container[data-v-8a131f64] {\n    margin-top: 100px;\n}\n.search__container[data-v-8a131f64] {\n    width: 20%;\n    margin: 0 auto;\n}\n#favorite-artists[data-v-8a131f64] {\n    display: flex;\n    justify-content: space-around;\n}\n#favorite-tracks[data-v-8a131f64] {\n    display: flex;\n    justify-content: space-around;\n}\n#track[data-v-8a131f64] {\n    text-align:center;\n    color: white;\n}\n#artist[data-v-8a131f64] {\n    text-align: center;\n    color: white;\n}\n#artists-heading[data-v-8a131f64] {\n    color: white;\n    font-weight: bolder;\n    margin: 50px;\n}\n#track-heading[data-v-8a131f64] {\n    color: white;\n    font-weight: bolder;\n    margin: 50px;\n}\n#artist-image[data-v-8a131f64] {\n    width: 160px;\n    height: 160px;\n    overflow: hidden;\n    border-radius: 100%;\n}\n#artist-image img[data-v-8a131f64] {\n    min-height: 160px;\n}\n#track-image[data-v-8a131f64] {\n    width: 160px;\n    height: 160px;\n    overflow: hidden;\n}\n#track-image img[data-v-8a131f64] {\n    width: 160px;\n    height: 160px;\n}\n#track-name[data-v-8a131f64] {\n    margin: 0 auto;\n    margin-top: 10px;\n    max-width: 100px;\n}\n#artist-name[data-v-8a131f64] {\n    margin: 10px;\n    font-weight: bolder;\n}\n.search__input[data-v-8a131f64] {\n    width: 100%;\n    padding: 12px 24px;\n    transition: transform 250ms ease-in-out;\n    font-size: 14px;\n    line-height: 18px;\n\n    color: #575756;\n    background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E\");\n    background-repeat: no-repeat;\n    background-size: 18px 18px;\n    background-position: 95% center;\n    border-radius: 50px;\n    border: 1px solid #575756;\n}\n.search__input[data-v-8a131f64]::-moz-placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n.search__input[data-v-8a131f64]:-ms-input-placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n.search__input[data-v-8a131f64]::-ms-input-placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n.search__input[data-v-8a131f64]::placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n\n", ""]);
+exports.push([module.i, "\n#spotify-container[data-v-8a131f64] {\n    width: 100%;\n}\n#spotify-content-container[data-v-8a131f64] {\n    margin-top: 100px;\n}\n.search__container[data-v-8a131f64] {\n    width: 20%;\n    margin: 0 auto;\n}\n#favorite-artists[data-v-8a131f64] {\n    display: flex;\n    justify-content: space-around;\n}\n#favorite-tracks[data-v-8a131f64] {\n    display: flex;\n    justify-content: space-around;\n}\n#track[data-v-8a131f64] {\n    text-align:center;\n    color: white;\n}\n#artist[data-v-8a131f64] {\n    text-align: center;\n    color: white;\n}\n#artists-heading[data-v-8a131f64] {\n    color: white;\n    font-weight: bolder;\n    margin: 50px;\n}\n#track-heading[data-v-8a131f64] {\n    color: white;\n    font-weight: bolder;\n    margin: 50px;\n}\n#artist-image[data-v-8a131f64] {\n    width: 160px;\n    height: 160px;\n    overflow: hidden;\n    border-radius: 100%;\n}\n#artist-image img[data-v-8a131f64] {\n    min-height: 160px;\n}\n#track-image[data-v-8a131f64] {\n    width: 160px;\n    height: 160px;\n    overflow: hidden;\n}\n#track-image img[data-v-8a131f64] {\n    width: 160px;\n    height: 160px;\n}\n#track-name[data-v-8a131f64] {\n    margin: 0 auto;\n    margin-top: 10px;\n    max-width: 100px;\n}\n#artist-name[data-v-8a131f64] {\n    margin: 10px;\n    font-weight: bolder;\n}\n.search__input[data-v-8a131f64] {\n    width: 100%;\n    padding: 12px 24px;\n    transition: transform 250ms ease-in-out;\n    font-size: 14px;\n    line-height: 18px;\n\n    color: #575756;\n    background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E\");\n    background-repeat: no-repeat;\n    background-size: 18px 18px;\n    background-position: 95% center;\n    border-radius: 50px;\n    border: 1px solid #575756;\n}\n.search__input[data-v-8a131f64]::-moz-placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n.search__input[data-v-8a131f64]:-ms-input-placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n.search__input[data-v-8a131f64]::-ms-input-placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n.search__input[data-v-8a131f64]::placeholder {\n    color: rgba(87, 87, 86, 0.8);\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n}\n.image-container[data-v-8a131f64] {\n    position: relative;\n    width: 200px;\n    height: 300px;\n}\n.image-container .play-button[data-v-8a131f64] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: none;\n    color: #FFFF;\n}\n.image-container:hover .play-button[data-v-8a131f64] {\n    display: block;\n    background: rgba(0, 0, 0, .6);\n}\n@-webkit-keyframes spin-data-v-8a131f64 {\nto {\n        transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-8a131f64 {\nto {\n        transform: rotate(360deg);\n}\n}\n.stroke-solid[data-v-8a131f64] {\n    stroke-dashoffset: 0;\n    stroke-dashArray: 300;\n    stroke-width: 4px;\n    transition: stroke-dashoffset 1s ease,  opacity 1s ease;\n}\n.icon[data-v-8a131f64] {\n    transform: scale(0.8);\n    transform-origin: 50% 50%;\n    transition: transform 200ms ease-out;\n}\n#play:hover .stroke-solid[data-v-8a131f64] {\n    opacity: 1;\n    stroke-dashoffset: 300;\n}\n#play:hover .icon[data-v-8a131f64] {\n    transform: scale(0.9);\n}\n#play[data-v-8a131f64] {\n    cursor: pointer;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translateY(-50%) translateX(-50%);\n}\n\n\n", ""]);
 
 // exports
 
@@ -4038,17 +4061,62 @@ var render = function() {
         { attrs: { id: "favorite-artists" } },
         _vm._l(this.artists, function(artist) {
           return _c("div", { attrs: { id: "artist" } }, [
-            _c("div", { attrs: { id: "artist-image" } }, [
-              _c("img", {
-                attrs: { src: artist.image.url, alt: "Artist image" }
-              })
-            ]),
+            _c(
+              "div",
+              { staticClass: "image-container", attrs: { id: "artist-image" } },
+              [
+                _c("img", {
+                  attrs: { src: artist.image.url, alt: "Artist image" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "play-button" }, [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        version: "1.1",
+                        id: "play",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                        x: "0px",
+                        y: "0px",
+                        height: "100px",
+                        width: "100px",
+                        viewBox: "0 0 100 100",
+                        "enable-background": "new 0 0 100 100",
+                        "xml:space": "preserve"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        staticClass: "stroke-solid",
+                        attrs: {
+                          fill: "none",
+                          stroke: "#ddbe72",
+                          d:
+                            "M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7\n    C97.3,23.7,75.7,2.3,49.9,2.5"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        staticClass: "icon",
+                        attrs: {
+                          fill: "#ddbe72",
+                          d:
+                            "M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z"
+                        }
+                      })
+                    ]
+                  )
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("div", { attrs: { id: "artist-name" } }, [
               _vm._v(
-                "\n                    " +
+                "\n                        " +
                   _vm._s(artist.name) +
-                  "\n                "
+                  "\n                    "
               )
             ])
           ])
@@ -4065,15 +4133,62 @@ var render = function() {
         { attrs: { id: "favorite-tracks" } },
         _vm._l(this.tracks, function(track) {
           return _c("div", { attrs: { id: "track" } }, [
-            _c("div", { attrs: { id: "track-image" } }, [
-              _c("img", { attrs: { src: track.image.url, alt: "Track image" } })
-            ]),
+            _c(
+              "div",
+              { staticClass: "image-container", attrs: { id: "track-image" } },
+              [
+                _c("img", {
+                  attrs: { src: track.image.url, alt: "Track image" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "play-button" }, [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        version: "1.1",
+                        id: "play",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                        x: "0px",
+                        y: "0px",
+                        height: "100px",
+                        width: "100px",
+                        viewBox: "0 0 100 100",
+                        "enable-background": "new 0 0 100 100",
+                        "xml:space": "preserve"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        staticClass: "stroke-solid",
+                        attrs: {
+                          fill: "none",
+                          stroke: "#ddbe72",
+                          d:
+                            "M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7\n    C97.3,23.7,75.7,2.3,49.9,2.5"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        staticClass: "icon",
+                        attrs: {
+                          fill: "#ddbe72",
+                          d:
+                            "M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z"
+                        }
+                      })
+                    ]
+                  )
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("div", { attrs: { id: "track-name" } }, [
               _vm._v(
-                "\n                    " +
+                "\n                        " +
                   _vm._s(track.name) +
-                  "\n                "
+                  "\n                    "
               )
             ])
           ])

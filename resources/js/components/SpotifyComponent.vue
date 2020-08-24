@@ -9,8 +9,21 @@
             <h1 id="artists-heading">Your favorite artists</h1>
             <div id="favorite-artists">
                 <div id="artist" v-for="artist in this.artists">
-                    <div id="artist-image">
+                    <div id="artist-image" class="image-container">
                         <img v-bind:src="artist.image.url" alt="Artist image">
+
+                        <div class="play-button">
+
+                            <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100px"
+                                 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  <path class="stroke-solid" fill="none" stroke="#ddbe72"  d="M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7
+    C97.3,23.7,75.7,2.3,49.9,2.5"/>
+                                <path class="icon" fill="#ddbe72" d="M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z"/>
+</svg>
+
+
+                        </div>
+
                     </div>
                     <div id="artist-name">
                         {{artist.name}}
@@ -21,8 +34,18 @@
             <h1 id="track-heading">Your favorite tracks</h1>
             <div id="favorite-tracks">
                 <div id="track" v-for="track in this.tracks">
-                    <div id="track-image">
+                    <div id="track-image" class="image-container">
                         <img v-bind:src="track.image.url" alt="Track image">
+                        <div class="play-button">
+
+                            <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100px"
+                                 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  <path class="stroke-solid" fill="none" stroke="#ddbe72"  d="M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7
+    C97.3,23.7,75.7,2.3,49.9,2.5"/>
+                                <path class="icon" fill="#ddbe72" d="M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z"/>
+</svg>
+
+                        </div>
                     </div>
                     <div id="track-name">
                         {{track.name}}
@@ -163,5 +186,61 @@ export default {
     text-transform: uppercase;
     letter-spacing: 1.5px;
 }
+
+.image-container {
+    position: relative;
+    width: 200px;
+    height: 300px;
+}
+
+.image-container .play-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    color: #FFFF;
+}
+
+.image-container:hover .play-button {
+    display: block;
+    background: rgba(0, 0, 0, .6);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.stroke-solid {
+    stroke-dashoffset: 0;
+    stroke-dashArray: 300;
+    stroke-width: 4px;
+    transition: stroke-dashoffset 1s ease,  opacity 1s ease;
+}
+
+.icon {
+    transform: scale(0.8);
+    transform-origin: 50% 50%;
+    transition: transform 200ms ease-out;
+}
+
+#play:hover .stroke-solid {
+    opacity: 1;
+    stroke-dashoffset: 300;
+}
+#play:hover .icon {
+    transform: scale(0.9);
+}
+
+#play {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
 
 </style>
