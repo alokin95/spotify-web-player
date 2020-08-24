@@ -6,7 +6,7 @@
             </div>
         </div>
         <div id="spotify-content-container">
-            <h1 id="artists-heading">Your favorite artists</h1>
+            <h1 id="artists-heading">Favorite artists</h1>
             <div id="favorite-artists">
                 <div id="artist" v-for="artist in this.artists">
                     <div id="artist-image" class="image-container">
@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <h1 id="track-heading">Your favorite tracks</h1>
+            <h1 id="track-heading">Favorite tracks</h1>
             <div id="favorite-tracks">
                 <div id="track" v-for="track in this.tracks">
                     <div id="track-image" class="image-container">

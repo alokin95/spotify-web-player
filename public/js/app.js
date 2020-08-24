@@ -1921,11 +1921,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
-      player: {}
+      player: {},
+      currentTrack: {},
+      trackLoaded: false,
+      playing: false
     };
   },
   mounted: function mounted() {
@@ -1974,7 +1979,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addPlayerListeners: function addPlayerListeners() {
-      // Error handling
+      var self = this; // Error handling
+
       this.player.addListener('initialization_error', function (_ref) {
         var message = _ref.message;
         console.error(message);
@@ -1993,7 +1999,9 @@ __webpack_require__.r(__webpack_exports__);
       }); // Playback status updates
 
       this.player.addListener('player_state_changed', function (state) {
-        console.log('promenio');
+        self.currentTrack = state;
+        self.playing = true;
+        self.trackLoaded = true;
       }); // Ready
 
       this.player.addListener('ready', function (_ref5) {
@@ -2308,7 +2316,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fira+Sans);", ""]);
 
 // module
-exports.push([module.i, "\nhtml[data-v-4db030bc], body[data-v-4db030bc] {\n    position: relative;\n    min-height: 100vh;\n    background-color: #FFF0F5;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-family: \"Fira Sans\", Helvetica, Arial, sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n.player[data-v-4db030bc] {\n    position: relative;\n}\n.player .info[data-v-4db030bc] {\n    position: absolute;\n    height: 60px;\n    top: 0;\n    opacity: 0;\n    left: 10px;\n    right: 10px;\n    background-color: rgba(255, 255, 255, 0.5);\n    padding: 5px 15px 5px 110px;\n    border-radius: 15px;\n    transition: all .5s ease;\n}\n.player .info .artist[data-v-4db030bc],\n.player .info .name[data-v-4db030bc] {\n    display: block;\n}\n.player .info .artist[data-v-4db030bc] {\n    color: #222;\n    font-size: 16px;\n    margin-bottom: 5px;\n}\n.player .info .name[data-v-4db030bc] {\n    color: #999;\n    font-size: 12px;\n    margin-bottom: 8px;\n}\n.player .info .progress-bar[data-v-4db030bc] {\n    background-color: #ddd;\n    height: 2px;\n    width: 100%;\n    position: relative;\n}\n.player .info .progress-bar .bar[data-v-4db030bc] {\n    position: absolute;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    background-color: red;\n    width: 10%;\n    transition: all .2s ease;\n}\n.player .info.active[data-v-4db030bc] {\n    top: -60px;\n    opacity: 1;\n    transition: all .5s ease;\n}\n.player .control-panel[data-v-4db030bc] {\n    position: relative;\n    background-color: #fff;\n    border-radius: 15px;\n    width: 300px;\n    height: 80px;\n    z-index: 5;\n}\n.player .control-panel .album-art[data-v-4db030bc] {\n    background-color: beige;\n    position: absolute;\n    left: 20px;\n    height: 80px;\n    width: 80px;\n    border-radius: 50%;\n    box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0);\n    transform: scale(1);\n    transition: all .5s ease;\n}\n.player .control-panel .album-art[data-v-4db030bc]::after {\n    content: '';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 15px;\n    height: 15px;\n    background-color: #fff;\n    border-radius: 50%;\n    z-index: 5;\n    transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n}\n.player .control-panel .album-art[data-v-4db030bc]::before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    border-radius: 50%;\n    background-position: center;\n    background-repeat: no-repeat;\n    background-size: 80px;\n}\n.player .control-panel.active .album-art[data-v-4db030bc] {\n    box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);\n    transform: scale(1.2);\n    transition: all .5s ease;\n}\n.player .control-panel.active .album-art[data-v-4db030bc]::before {\n    animation: rotation-data-v-4db030bc 3s infinite linear;\n    -webkit-animation: rotation-data-v-4db030bc 3s infinite linear;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n@-webkit-keyframes rotation-data-v-4db030bc {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n@keyframes rotation-data-v-4db030bc {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n.player .control-panel .controls[data-v-4db030bc] {\n    display: flex;\n    justify-content: flex-end;\n    height: 80px;\n    padding: 0 15px;\n}\n.player .control-panel .controls .prev[data-v-4db030bc],\n.player .control-panel .controls .play[data-v-4db030bc],\n.player .control-panel .controls .next[data-v-4db030bc] {\n    width: 55px;\n    height: auto;\n    border-radius: 10px;\n    background-position: center center;\n    background-repeat: no-repeat;\n    background-size: 20px;\n    margin: 5px 0;\n    background-color: #fff;\n    cursor: pointer;\n    transition: background-color .3s ease;\n    -webkit-transition: background-color .3s ease;\n}\n.player .control-panel .controls .prev[data-v-4db030bc]:hover,\n.player .control-panel .controls .play[data-v-4db030bc]:hover,\n.player .control-panel .controls .next[data-v-4db030bc]:hover {\n    background-color: #eee;\n    transition: background-color .3s ease;\n    -webkit-transition: background-color .3s ease;\n}\n.player .control-panel .controls .prev[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI1MC40ODggMjUwLjQ4OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjUwLjQ4OCAyNTAuNDg4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9IlByZXZpb3VzX3RyYWNrIj4KCTxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDsiIGQ9Ik0yMzcuNDg0LDIyLjU4N2MtMy4yNjYsMC03LjU5MS0wLjQwMS0xMS4wNzIsMi4wMDVsLTkyLjI2NCw3Ny45MVYzNy4yNTIgICBjMC0yLjUwNywwLjA1Ny0xNC42NjYtMTMuMDA0LTE0LjY2NmMtMy4yNjUsMC03LjU5LTAuNDAxLTExLjA3MiwyLjAwNUw4LjEwNywxMTAuNjkzYy05LjY2OSw2LjY3NC03Ljk5NywxNC41NTEtNy45OTcsMTQuNTUxICAgcy0xLjY3MSw3Ljg3OCw3Ljk5NywxNC41NTFsMTAxLjk2NSw4Ni4xMDJjMy40ODIsMi40MDUsNy44MDcsMi4wMDQsMTEuMDcyLDIuMDA0YzEzLjA2MiwwLDEzLjAwNC0xMS43LDEzLjAwNC0xNC42NjZ2LTY1LjI0OSAgIGw5Mi4yNjQsNzcuOTExYzMuNDgyLDIuNDA1LDcuODA3LDIuMDA0LDExLjA3MiwyLjAwNGMxMy4wNjIsMCwxMy4wMDQtMTEuNywxMy4wMDQtMTQuNjY2VjM3LjI1MiAgIEMyNTAuNDg4LDM0Ljc0NiwyNTAuNTQ2LDIyLjU4NywyMzcuNDg0LDIyLjU4N3oiIGZpbGw9IiNjMmM2Y2YiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);\n}\n.player .control-panel .controls .play[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDIzMi4xNTMgMjMyLjE1MyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjMyLjE1MyAyMzIuMTUzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9IlBsYXkiPgoJPHBhdGggc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkOyIgZD0iTTIwMy43OTEsOTkuNjI4TDQ5LjMwNywyLjI5NGMtNC41NjctMi43MTktMTAuMjM4LTIuMjY2LTE0LjUyMS0yLjI2NiAgIGMtMTcuMTMyLDAtMTcuMDU2LDEzLjIyNy0xNy4wNTYsMTYuNTc4djE5OC45NGMwLDIuODMzLTAuMDc1LDE2LjU3OSwxNy4wNTYsMTYuNTc5YzQuMjgzLDAsOS45NTUsMC40NTEsMTQuNTIxLTIuMjY3ICAgbDE1NC40ODMtOTcuMzMzYzEyLjY4LTcuNTQ1LDEwLjQ4OS0xNi40NDksMTAuNDg5LTE2LjQ0OVMyMTYuNDcxLDEwNy4xNzIsMjAzLjc5MSw5OS42Mjh6IiBmaWxsPSIjYzJjNmNmIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);\n}\n.player .control-panel .controls .next[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI1MC40ODggMjUwLjQ4OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjUwLjQ4OCAyNTAuNDg4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9Ik5leHRfdHJhY2tfMiI+Cgk8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7IiBkPSJNMjQyLjM4MSwxMTAuNjkzTDE0MC40MTUsMjQuNTkxYy0zLjQ4LTIuNDA2LTcuODA1LTIuMDA1LTExLjA3MS0yLjAwNSAgIGMtMTMuMDYxLDAtMTMuMDAzLDExLjctMTMuMDAzLDE0LjY2NnY2NS4yNDlsLTkyLjI2NS03Ny45MWMtMy40ODItMi40MDYtNy44MDctMi4wMDUtMTEuMDcyLTIuMDA1ICAgQy0wLjA1NywyMi41ODcsMCwzNC4yODcsMCwzNy4yNTJ2MTc1Ljk4M2MwLDIuNTA3LTAuMDU3LDE0LjY2NiwxMy4wMDQsMTQuNjY2YzMuMjY1LDAsNy41OSwwLjQwMSwxMS4wNzItMi4wMDVsOTIuMjY1LTc3LjkxICAgdjY1LjI0OWMwLDIuNTA3LTAuMDU4LDE0LjY2NiwxMy4wMDMsMTQuNjY2YzMuMjY2LDAsNy41OTEsMC40MDEsMTEuMDcxLTIuMDA1bDEwMS45NjYtODYuMTAxICAgYzkuNjY4LTYuNjc1LDcuOTk3LTE0LjU1MSw3Ljk5Ny0xNC41NTFTMjUyLjA0OSwxMTcuMzY3LDI0Mi4zODEsMTEwLjY5M3oiIGZpbGw9IiNjMmM2Y2YiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);\n}\n.player .control-panel.active .controls .play[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDIzMi42NzkgMjMyLjY3OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjMyLjY3OSAyMzIuNjc5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9IlBhdXNlIj4KCTxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDsiIGQ9Ik04MC41NDMsMEgzNS43OTdjLTkuODg1LDAtMTcuODk4LDguMDE0LTE3Ljg5OCwxNy44OTh2MTk2Ljg4MyAgIGMwLDkuODg1LDguMDEzLDE3Ljg5OCwxNy44OTgsMTcuODk4aDQ0Ljc0NmM5Ljg4NSwwLDE3Ljg5OC04LjAxMywxNy44OTgtMTcuODk4VjE3Ljg5OEM5OC40NCw4LjAxNCw5MC40MjcsMCw4MC41NDMsMHogTTE5Ni44ODIsMCAgIGgtNDQuNzQ2Yy05Ljg4NiwwLTE3Ljg5OSw4LjAxNC0xNy44OTksMTcuODk4djE5Ni44ODNjMCw5Ljg4NSw4LjAxMywxNy44OTgsMTcuODk5LDE3Ljg5OGg0NC43NDYgICBjOS44ODUsMCwxNy44OTgtOC4wMTMsMTcuODk4LTE3Ljg5OFYxNy44OThDMjE0Ljc4MSw4LjAxNCwyMDYuNzY3LDAsMTk2Ljg4MiwweiIgZmlsbD0iI2MyYzZjZiIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);\n}\n\n\n", ""]);
+exports.push([module.i, "\nhtml[data-v-4db030bc], body[data-v-4db030bc] {\n    position: relative;\n    min-height: 100vh;\n    background-color: #FFF0F5;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-family: \"Fira Sans\", Helvetica, Arial, sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n.track-album-cover-spinning[data-v-4db030bc] {\n    -webkit-animation:spin-data-v-4db030bc 4s linear infinite;\n    animation:spin-data-v-4db030bc 4s linear infinite;\n}\n@-webkit-keyframes spin-data-v-4db030bc {\n100% { -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-4db030bc {\n100% { transform:rotate(360deg);\n}\n}\n.album-art[data-v-4db030bc] {\n    overflow: hidden;\n}\n.album-art img[data-v-4db030bc] {\n    width: 80px;\n    height: 80px;\n}\n.player[data-v-4db030bc] {\n    position: relative;\n}\n.player .info[data-v-4db030bc] {\n    position: absolute;\n    height: 60px;\n    top: 0;\n    opacity: 0;\n    left: 10px;\n    right: 10px;\n    background-color: rgba(255, 255, 255, 0.5);\n    padding: 5px 15px 5px 110px;\n    border-radius: 15px;\n    transition: all .5s ease;\n}\n.player .info .artist[data-v-4db030bc],\n.player .info .name[data-v-4db030bc] {\n    display: block;\n}\n.player .info .artist[data-v-4db030bc] {\n    color: #222;\n    font-size: 16px;\n    margin-bottom: 5px;\n}\n.player .info .name[data-v-4db030bc] {\n    color: #999;\n    font-size: 12px;\n    margin-bottom: 8px;\n}\n.player .info .progress-bar[data-v-4db030bc] {\n    background-color: #ddd;\n    height: 2px;\n    width: 100%;\n    position: relative;\n}\n.player .info .progress-bar .bar[data-v-4db030bc] {\n    position: absolute;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    background-color: red;\n    width: 10%;\n    transition: all .2s ease;\n}\n.player .info.active[data-v-4db030bc] {\n    top: -60px;\n    opacity: 1;\n    transition: all .5s ease;\n}\n.player .control-panel[data-v-4db030bc] {\n    position: relative;\n    background-color: #fff;\n    border-radius: 15px;\n    width: 300px;\n    height: 80px;\n    z-index: 5;\n}\n.player .control-panel .album-art[data-v-4db030bc] {\n    background-color: beige;\n    position: absolute;\n    left: 20px;\n    height: 80px;\n    width: 80px;\n    border-radius: 50%;\n    box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0);\n    transform: scale(1);\n    transition: all .5s ease;\n}\n.player .control-panel .album-art[data-v-4db030bc]::after {\n    content: '';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 15px;\n    height: 15px;\n    background-color: #fff;\n    border-radius: 50%;\n    z-index: 5;\n    transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n}\n.player .control-panel .album-art[data-v-4db030bc]::before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    border-radius: 50%;\n    background-position: center;\n    background-repeat: no-repeat;\n    background-size: 80px;\n}\n.player .control-panel.active .album-art[data-v-4db030bc] {\n    box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);\n    transform: scale(1.2);\n    transition: all .5s ease;\n}\n.player .control-panel.active .album-art[data-v-4db030bc]::before {\n    animation: rotation-data-v-4db030bc 3s infinite linear;\n    -webkit-animation: rotation-data-v-4db030bc 3s infinite linear;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n@-webkit-keyframes rotation-data-v-4db030bc {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n@keyframes rotation-data-v-4db030bc {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n.player .control-panel .controls[data-v-4db030bc] {\n    display: flex;\n    justify-content: flex-end;\n    height: 80px;\n    padding: 0 15px;\n}\n.player .control-panel .controls .prev[data-v-4db030bc],\n.player .control-panel .controls .play[data-v-4db030bc],\n.player .control-panel .controls .next[data-v-4db030bc] {\n    width: 55px;\n    height: auto;\n    border-radius: 10px;\n    background-position: center center;\n    background-repeat: no-repeat;\n    background-size: 20px;\n    margin: 5px 0;\n    background-color: #fff;\n    cursor: pointer;\n    transition: background-color .3s ease;\n    -webkit-transition: background-color .3s ease;\n}\n.player .control-panel .controls .prev[data-v-4db030bc]:hover,\n.player .control-panel .controls .play[data-v-4db030bc]:hover,\n.player .control-panel .controls .next[data-v-4db030bc]:hover {\n    background-color: #eee;\n    transition: background-color .3s ease;\n    -webkit-transition: background-color .3s ease;\n}\n.player .control-panel .controls .prev[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI1MC40ODggMjUwLjQ4OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjUwLjQ4OCAyNTAuNDg4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9IlByZXZpb3VzX3RyYWNrIj4KCTxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDsiIGQ9Ik0yMzcuNDg0LDIyLjU4N2MtMy4yNjYsMC03LjU5MS0wLjQwMS0xMS4wNzIsMi4wMDVsLTkyLjI2NCw3Ny45MVYzNy4yNTIgICBjMC0yLjUwNywwLjA1Ny0xNC42NjYtMTMuMDA0LTE0LjY2NmMtMy4yNjUsMC03LjU5LTAuNDAxLTExLjA3MiwyLjAwNUw4LjEwNywxMTAuNjkzYy05LjY2OSw2LjY3NC03Ljk5NywxNC41NTEtNy45OTcsMTQuNTUxICAgcy0xLjY3MSw3Ljg3OCw3Ljk5NywxNC41NTFsMTAxLjk2NSw4Ni4xMDJjMy40ODIsMi40MDUsNy44MDcsMi4wMDQsMTEuMDcyLDIuMDA0YzEzLjA2MiwwLDEzLjAwNC0xMS43LDEzLjAwNC0xNC42NjZ2LTY1LjI0OSAgIGw5Mi4yNjQsNzcuOTExYzMuNDgyLDIuNDA1LDcuODA3LDIuMDA0LDExLjA3MiwyLjAwNGMxMy4wNjIsMCwxMy4wMDQtMTEuNywxMy4wMDQtMTQuNjY2VjM3LjI1MiAgIEMyNTAuNDg4LDM0Ljc0NiwyNTAuNTQ2LDIyLjU4NywyMzcuNDg0LDIyLjU4N3oiIGZpbGw9IiNjMmM2Y2YiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);\n}\n.player .control-panel .controls .play[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDIzMi4xNTMgMjMyLjE1MyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjMyLjE1MyAyMzIuMTUzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9IlBsYXkiPgoJPHBhdGggc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkOyIgZD0iTTIwMy43OTEsOTkuNjI4TDQ5LjMwNywyLjI5NGMtNC41NjctMi43MTktMTAuMjM4LTIuMjY2LTE0LjUyMS0yLjI2NiAgIGMtMTcuMTMyLDAtMTcuMDU2LDEzLjIyNy0xNy4wNTYsMTYuNTc4djE5OC45NGMwLDIuODMzLTAuMDc1LDE2LjU3OSwxNy4wNTYsMTYuNTc5YzQuMjgzLDAsOS45NTUsMC40NTEsMTQuNTIxLTIuMjY3ICAgbDE1NC40ODMtOTcuMzMzYzEyLjY4LTcuNTQ1LDEwLjQ4OS0xNi40NDksMTAuNDg5LTE2LjQ0OVMyMTYuNDcxLDEwNy4xNzIsMjAzLjc5MSw5OS42Mjh6IiBmaWxsPSIjYzJjNmNmIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);\n}\n.player .control-panel .controls .next[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI1MC40ODggMjUwLjQ4OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjUwLjQ4OCAyNTAuNDg4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9Ik5leHRfdHJhY2tfMiI+Cgk8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7IiBkPSJNMjQyLjM4MSwxMTAuNjkzTDE0MC40MTUsMjQuNTkxYy0zLjQ4LTIuNDA2LTcuODA1LTIuMDA1LTExLjA3MS0yLjAwNSAgIGMtMTMuMDYxLDAtMTMuMDAzLDExLjctMTMuMDAzLDE0LjY2NnY2NS4yNDlsLTkyLjI2NS03Ny45MWMtMy40ODItMi40MDYtNy44MDctMi4wMDUtMTEuMDcyLTIuMDA1ICAgQy0wLjA1NywyMi41ODcsMCwzNC4yODcsMCwzNy4yNTJ2MTc1Ljk4M2MwLDIuNTA3LTAuMDU3LDE0LjY2NiwxMy4wMDQsMTQuNjY2YzMuMjY1LDAsNy41OSwwLjQwMSwxMS4wNzItMi4wMDVsOTIuMjY1LTc3LjkxICAgdjY1LjI0OWMwLDIuNTA3LTAuMDU4LDE0LjY2NiwxMy4wMDMsMTQuNjY2YzMuMjY2LDAsNy41OTEsMC40MDEsMTEuMDcxLTIuMDA1bDEwMS45NjYtODYuMTAxICAgYzkuNjY4LTYuNjc1LDcuOTk3LTE0LjU1MSw3Ljk5Ny0xNC41NTFTMjUyLjA0OSwxMTcuMzY3LDI0Mi4zODEsMTEwLjY5M3oiIGZpbGw9IiNjMmM2Y2YiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);\n}\n.player .control-panel.active .controls .play[data-v-4db030bc] {\n    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDIzMi42NzkgMjMyLjY3OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjMyLjY3OSAyMzIuNjc5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGcgaWQ9IlBhdXNlIj4KCTxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDsiIGQ9Ik04MC41NDMsMEgzNS43OTdjLTkuODg1LDAtMTcuODk4LDguMDE0LTE3Ljg5OCwxNy44OTh2MTk2Ljg4MyAgIGMwLDkuODg1LDguMDEzLDE3Ljg5OCwxNy44OTgsMTcuODk4aDQ0Ljc0NmM5Ljg4NSwwLDE3Ljg5OC04LjAxMywxNy44OTgtMTcuODk4VjE3Ljg5OEM5OC40NCw4LjAxNCw5MC40MjcsMCw4MC41NDMsMHogTTE5Ni44ODIsMCAgIGgtNDQuNzQ2Yy05Ljg4NiwwLTE3Ljg5OSw4LjAxNC0xNy44OTksMTcuODk4djE5Ni44ODNjMCw5Ljg4NSw4LjAxMywxNy44OTgsMTcuODk5LDE3Ljg5OGg0NC43NDYgICBjOS44ODUsMCwxNy44OTgtOC4wMTMsMTcuODk4LTE3Ljg5OFYxNy44OThDMjE0Ljc4MSw4LjAxNCwyMDYuNzY3LDAsMTk2Ljg4MiwweiIgZmlsbD0iI2MyYzZjZiIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);\n}\n\n\n", ""]);
 
 // exports
 
@@ -3722,32 +3730,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "player" }, [
-      _c(
-        "div",
-        { staticClass: "control-panel", attrs: { id: "control-panel" } },
-        [
-          _c("div", { staticClass: "album-art" }),
+  return _c("div", { staticClass: "player" }, [
+    _c(
+      "div",
+      { staticClass: "control-panel", attrs: { id: "control-panel" } },
+      [
+        _c("div", { staticClass: "album-art" }, [
+          _c("img", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.trackLoaded,
+                expression: "trackLoaded"
+              }
+            ],
+            class: { playing: "track-album-cover-spinning" },
+            attrs: {
+              src: _vm.trackLoaded
+                ? _vm.currentTrack.track_window.current_track.album.images[2]
+                    .url
+                : ""
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "controls" }, [
+          _c("div", { staticClass: "prev" }),
           _vm._v(" "),
-          _c("div", { staticClass: "controls" }, [
-            _c("div", { staticClass: "prev" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "play", attrs: { id: "play" } }),
-            _vm._v(" "),
-            _c("div", { staticClass: "next" })
-          ])
-        ]
-      )
-    ])
-  }
-]
+          _c("div", { staticClass: "play", attrs: { id: "play" } }),
+          _vm._v(" "),
+          _c("div", {
+            staticClass: "next",
+            on: { click: _vm.initializeSpotifyObject }
+          })
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -3970,7 +3992,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { attrs: { id: "spotify-content-container" } }, [
       _c("h1", { attrs: { id: "artists-heading" } }, [
-        _vm._v("Your favorite artists")
+        _vm._v("Favorite artists")
       ]),
       _vm._v(" "),
       _c(
@@ -4052,9 +4074,7 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _c("h1", { attrs: { id: "track-heading" } }, [
-        _vm._v("Your favorite tracks")
-      ]),
+      _c("h1", { attrs: { id: "track-heading" } }, [_vm._v("Favorite tracks")]),
       _vm._v(" "),
       _c(
         "div",

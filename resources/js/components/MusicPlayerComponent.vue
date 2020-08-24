@@ -1,11 +1,13 @@
 <template>
     <div class="player">
         <div id="control-panel" class="control-panel">
-            <div class="album-art"></div>
+            <div class="album-art">
+                <img v-bind:class="{playing: 'track-album-cover-spinning'}" v-show="trackLoaded" :src="trackLoaded ? currentTrack.track_window.current_track.album.images[2].url : ''">
+            </div>
             <div class="controls">
                 <div class="prev"></div>
                 <div id="play" class="play"></div>
-                <div class="next"></div>
+                <div class="next" @click="initializeSpotifyObject"></div>
             </div>
         </div>
     </div>
@@ -17,7 +19,10 @@ export default {
     data() {
         return {
             user: {},
-            player: {}
+            player: {},
+            currentTrack: {},
+            trackLoaded: false,
+            playing: false
         }
     },
 
@@ -71,6 +76,7 @@ export default {
         },
 
         addPlayerListeners() {
+            let self = this;
             // Error handling
             this.player.addListener('initialization_error', ({ message }) => { console.error(message); });
             this.player.addListener('authentication_error', ({ message }) => { console.error(message); });
@@ -78,7 +84,7 @@ export default {
             this.player.addListener('playback_error', ({ message }) => { console.error(message); });
 
             // Playback status updates
-            this.player.addListener('player_state_changed', state => { console.log('promenio'); });
+            this.player.addListener('player_state_changed', state => { self.currentTrack = state; self.playing = true; self.trackLoaded = true; });
 
             // Ready
             this.player.addListener('ready', ({device_id}) => {
@@ -109,6 +115,24 @@ html, body {
     font-family: "Fira Sans", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.track-album-cover-spinning {
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.album-art {
+    overflow: hidden;
+}
+
+.album-art img {
+    width: 80px;
+    height: 80px;
 }
 
 .player {
