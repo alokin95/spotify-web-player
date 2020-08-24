@@ -2,10 +2,7 @@
     <section class="accordion">
         <section class="accordion-tabs">
             <button class="accordion-tab accordion-active" data-actab-group="0" data-actab-id="0" @click="selectTab('spotify')">Spotify</button>
-            <button class="accordion-tab" data-actab-group="0" data-actab-id="1" @click="selectTab('sports')">Tab 2</button>
-            <button class="accordion-tab" data-actab-group="0" data-actab-id="2">Tab 3</button>
-            <button class="accordion-tab" data-actab-group="0" data-actab-id="3">Tab 4</button>
-            <button class="accordion-tab" data-actab-group="0" data-actab-id="4">Tab 5</button>
+            <button class="accordion-tab" data-actab-group="0" data-actab-id="1" @click="selectTab('sports')">Sports</button>
         </section>
         <section class="accordion-content">
             <article class="accordion-item accordion-active" data-actab-group="0" data-actab-id="0">
@@ -16,21 +13,6 @@
             <article class="accordion-item" data-actab-group="0" data-actab-id="1">
                 <div class="accordion-item__container">
 
-                </div>
-            </article>
-            <article class="accordion-item" data-actab-group="0" data-actab-id="2">
-                <div class="accordion-item__container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, deserunt minima? Ut facere minus, ipsa dolore animi quis alias eos, porro corporis quod esse quidem. Maxime a aperiam perspiciatis architecto?</p>
-                </div>
-            </article>
-            <article class="accordion-item" data-actab-group="0" data-actab-id="3">
-                <div class="accordion-item__container">
-                    <p>psum dolor sit amet, consectetur adipisicing elit. Voluptates, deserunt minima? Ut facere minus, ipsa dolore</p>
-                </div>
-            </article>
-            <article class="accordion-item" data-actab-group="0" data-actab-id="4">
-                <div class="accordion-item__container">
-                    <p>aborum similique facere quae. Quo cupiditate ad iste qui aliquam quibusdam quod, ut doloremque ipsa quas soluta, sapiente possimus, tempora rerum ab nesciunt vitae molestiae dolor earum illum repudiandae! Voluptas sed, soluta facere nisi perferendis cupiditate! Dicta et praesentium non ab, quod commodi, illo saepe accusantium tempora autem eos nemo. Animi, pariatur placeat laudantium dolorib!</p>
                 </div>
             </article>
         </section>

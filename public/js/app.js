@@ -2064,24 +2064,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3831,34 +3813,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Tab 2")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "accordion-tab",
-          attrs: { "data-actab-group": "0", "data-actab-id": "2" }
-        },
-        [_vm._v("Tab 3")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "accordion-tab",
-          attrs: { "data-actab-group": "0", "data-actab-id": "3" }
-        },
-        [_vm._v("Tab 4")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "accordion-tab",
-          attrs: { "data-actab-group": "0", "data-actab-id": "4" }
-        },
-        [_vm._v("Tab 5")]
+        [_vm._v("Sports")]
       )
     ]),
     _vm._v(" "),
@@ -3879,13 +3834,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3)
+      _vm._m(0)
     ])
   ])
 }
@@ -3901,69 +3850,6 @@ var staticRenderFns = [
         attrs: { "data-actab-group": "0", "data-actab-id": "1" }
       },
       [_c("div", { staticClass: "accordion-item__container" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "article",
-      {
-        staticClass: "accordion-item",
-        attrs: { "data-actab-group": "0", "data-actab-id": "2" }
-      },
-      [
-        _c("div", { staticClass: "accordion-item__container" }, [
-          _c("p", [
-            _vm._v(
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, deserunt minima? Ut facere minus, ipsa dolore animi quis alias eos, porro corporis quod esse quidem. Maxime a aperiam perspiciatis architecto?"
-            )
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "article",
-      {
-        staticClass: "accordion-item",
-        attrs: { "data-actab-group": "0", "data-actab-id": "3" }
-      },
-      [
-        _c("div", { staticClass: "accordion-item__container" }, [
-          _c("p", [
-            _vm._v(
-              "psum dolor sit amet, consectetur adipisicing elit. Voluptates, deserunt minima? Ut facere minus, ipsa dolore"
-            )
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "article",
-      {
-        staticClass: "accordion-item",
-        attrs: { "data-actab-group": "0", "data-actab-id": "4" }
-      },
-      [
-        _c("div", { staticClass: "accordion-item__container" }, [
-          _c("p", [
-            _vm._v(
-              "aborum similique facere quae. Quo cupiditate ad iste qui aliquam quibusdam quod, ut doloremque ipsa quas soluta, sapiente possimus, tempora rerum ab nesciunt vitae molestiae dolor earum illum repudiandae! Voluptas sed, soluta facere nisi perferendis cupiditate! Dicta et praesentium non ab, quod commodi, illo saepe accusantium tempora autem eos nemo. Animi, pariatur placeat laudantium dolorib!"
-            )
-          ])
-        ])
-      ]
     )
   }
 ]
