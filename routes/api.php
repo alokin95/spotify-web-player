@@ -22,6 +22,7 @@ Route::namespace('Auth')->group(function(){
 });
 
 Route::get('/spotify/popular', 'SpotifyController@getArtistsAndTracks');
+Route::post('/spotify/play', 'SpotifyController@play');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

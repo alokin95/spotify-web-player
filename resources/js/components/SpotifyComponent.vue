@@ -12,7 +12,7 @@
                     <div id="artist-image" class="image-container">
                         <img v-bind:src="artist.image.url" alt="Artist image">
 
-                        <div class="play-button">
+                        <div class="play-button" @click="playSpotifyUri(artist.artistUri)">
 
                             <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100px"
                                  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
@@ -36,7 +36,7 @@
                 <div id="track" v-for="track in this.tracks">
                     <div id="track-image" class="image-container">
                         <img v-bind:src="track.image.url" alt="Track image">
-                        <div class="play-button">
+                        <div class="play-button" @click="playSpotifyUri(track.trackUri)">
 
                             <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100px"
                                  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
@@ -71,14 +71,22 @@ export default {
 
     methods: {
 
-      getMostListenedArtistsAndTracks() {
+        playSpotifyUri(uri) {
+            let deviceId = window.SpotifyPlayerId;
+            axios.post('api/spotify/play', {
+                deviceId,
+                uri
+            });
+        },
+
+        getMostListenedArtistsAndTracks() {
           let self = this;
           axios.get('api/spotify/popular')
             .then( response => {
                 self.artists = response.data.artists;
                 self.tracks = response.data.tracks;
             })
-      }
+        }
 
     }
 }

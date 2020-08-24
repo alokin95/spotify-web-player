@@ -27,4 +27,9 @@ class SpotifyController extends Controller
            'tracks'     => $response['tracks']
         ]);
     }
+
+    public function play()
+    {
+        $this->spotifyService->playUri();
+    }
 }

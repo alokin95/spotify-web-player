@@ -90,6 +90,24 @@ class SpotifyClient
         $response = Http::withHeaders(["Authorization" => "Bearer $accessToken"])->get("https://api.spotify.com/v1/me/top/$type?time_range=short_term&limit=5");
 
         return \GuzzleHttp\json_decode($response);
+    }
 
+    public function playUri($uri, $deviceId) : void
+    {
+        $accessToken = $this->tokenRepository->getAccessToken('spotify');
+        $deviceId = $deviceId ?: '';
+
+        $data = [
+            'context_uri' => $uri
+        ];
+
+        if (strpos($uri, ':track:'))
+        {
+            $data = [
+                "uris" => ["$uri"]
+            ];
+        }
+
+        Http::withHeaders(["Authorization" => "Bearer $accessToken"])->put("https://api.spotify.com/v1/me/player/play?device_id=$deviceId", $data);
     }
 }

@@ -136,7 +136,7 @@ class Track implements \JsonSerializable
             'artistName'    => $this->artistName,
             'artistUrl'     => $this->artistUrl,
             'trackUrl'      => $this->trackUrl,
-            'trackUri'      => $this->artistUri
+            'trackUri'      => $this->trackUri
         ];
     }
 }
